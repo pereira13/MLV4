@@ -329,7 +329,7 @@ function buildOpportunities(
       problem: "Não há dados suficientes para construir um conjunto confiável de termos.",
       action: "Completar o cadastro do produto e repetir a análise."
     });
-  }  } else {
+  }   else {
     const topMissing = keywords
       .slice(0, 5)
       .filter(
