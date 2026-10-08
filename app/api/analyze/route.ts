@@ -329,25 +329,26 @@ function buildOpportunities(
       problem: "Não há dados suficientes para construir um conjunto confiável de termos.",
       action: "Completar o cadastro do produto e repetir a análise."
     });
-  } else {
-    const topMissing = keywords.slice(0, 5).filter((k) => !normalize(`${title} ${description} ${features}`).includes(k.term));
+  }  } else {
+    const topMissing = keywords
+      .slice(0, 5)
+      .filter(
+        (k) =>
+          !normalize(
+            `${title} ${description} ${features}`
+          ).includes(k.term)
+      );
+
     if (topMissing.length) {
       opportunities.push({
         priority: "média",
         area: "Palavras-chave",
         problem: `Há ${topMissing.length} termos relevantes que não aparecem claramente no conteúdo atual.`,
-        action: `Avaliar o uso natural de: ${topMissing.map((k) => k.term).join(", ")}.
+        action: `Avaliar o uso natural de: ${topMissing
+          .map((k) => k.term)
+          .join(", ")}.`
       });
     }
-  }
-
-  if (!competitorsCount) {
-    opportunities.push({
-      priority: "baixa",
-      area: "Concorrência",
-      problem: "A busca comparativa não retornou concorrentes.",
-      action: "Repetir a análise quando a busca do Mercado Livre estiver disponível."
-    });
   }
 
   return opportunities.slice(0, 20);
